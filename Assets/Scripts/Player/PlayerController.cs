@@ -8,14 +8,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private int currentHealth;
     [SerializeField] private Transform gunPosition;
 
-    public Transform GunPosition
-    {
-        get
-        {
-            return gunPosition;
-        }
-    }
-
+    public Transform GunPosition { get { return gunPosition; } }
     public void IsDamaged(int damage)
     {
         currentHealth -= damage;

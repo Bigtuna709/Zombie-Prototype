@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   currentHeath: 5
+  zombieDamage: 1
 --- !u!114 &8601871409565862868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,14 +258,14 @@ NavMeshAgent:
   m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 300
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 1
 --- !u!136 &5700843409007232487
 CapsuleCollider:
   m_ObjectHideFlags: 0
