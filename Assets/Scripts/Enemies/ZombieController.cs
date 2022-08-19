@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieController : MonoBehaviour
+public class ZombieController : MonoBehaviour, IDamageable
 {
+    [SerializeField] int maxHealth;
+    [SerializeField] int currentHeath;
     public Transform Target { get; private set; }
     public NavMeshAgent _navMeshAgent { get; private set; }
     private StateMachine _stateMachine;
@@ -27,5 +29,14 @@ public class ZombieController : MonoBehaviour
             {typeof(ChaseState), new ChaseState(this) }
         };
         GetComponent<StateMachine>().SetStates(states);
+    }
+
+    public void IsDamaged(int damage)
+    {
+        currentHeath -= damage;
+        if (currentHeath <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
