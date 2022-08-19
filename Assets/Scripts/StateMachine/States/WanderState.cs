@@ -13,6 +13,11 @@ public class WanderState : BaseState
     private bool IsZombieIdle() => Time.time >= idleTime;
     public override Type Tick()
     {
+        if(_zombie._navMeshAgent.speed != ZombieSettings.ZombieWalkSpeed)
+        {
+            _zombie._navMeshAgent.speed = ZombieSettings.ZombieWalkSpeed;
+        }
+
         var chasePlayer = CheckForAggro();
         if (chasePlayer != null)
         {
@@ -88,6 +93,7 @@ public class WanderState : BaseState
             + new Vector3(UnityEngine.Random.Range(-1.5f, 1.5f), 0f, UnityEngine.Random.Range(-1.5f, 1.5f));
         _destination = new Vector3(newPosition.x, 1f, newPosition.z);
         _zombie._navMeshAgent.SetDestination(_destination.Value);
+
         idleTime = Time.time + UnityEngine.Random.Range(0.5f, 2f);
     }
 }
