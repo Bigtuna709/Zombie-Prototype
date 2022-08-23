@@ -19,7 +19,7 @@ public class ChaseState : BaseState
         {
             return typeof(WanderState);
         }
-        transform.LookAt(_zombie.Target);
+        transform.LookAt(new Vector3(_zombie.Target.transform.position.x, (_zombie.Target.transform.position.y + 1f), _zombie.Target.transform.position.z));
         _zombie._navMeshAgent.SetDestination(_zombie.Target.position);
 
         var _distance = Vector3.Distance(transform.position, _zombie.Target.position);

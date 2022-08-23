@@ -6,13 +6,8 @@ public class HandGunController : MonoBehaviour
     [SerializeField] private Transform fireLocation;
     private PickUpGun _pickUpGun;
     private FireWeapon _fireWeapon;
-    public Transform FireLocation
-    {
-        get
-        {
-            return fireLocation;
-        }
-    }
+
+    public Transform FireLocation { get { return fireLocation; } }
     private void Start()
     {
         _pickUpGun = GetComponent<PickUpGun>();
