@@ -43,7 +43,7 @@ public class WanderState : BaseState
         RaycastHit hit;
         var angle = transform.rotation * startingAngle;
         var direction = angle * Vector3.forward;
-        var pos = transform.position;
+        var pos = transform.position + new Vector3(0,1,0);
         for(var i = 0; i < ZombieSettings.ZombieAggroRadius; i++)
         {
             if (Physics.Raycast(pos, direction, out hit, ZombieSettings.ZombieAggroDistance))
@@ -51,13 +51,13 @@ public class WanderState : BaseState
                 var player = hit.collider.GetComponent<PlayerController>();
                 if(player != null)
                 {
-                    Debug.DrawRay(pos, direction * ZombieSettings.ZombieAggroDistance, Color.red);
+                    //Debug.DrawRay(pos, direction * ZombieSettings.ZombieAggroDistance, Color.red);
                     return player.transform;
                 }
             }
             else
                 Debug.DrawRay(pos, direction * ZombieSettings.ZombieAggroDistance, Color.blue);
-
+                
             direction = angleStep * direction;
         }
         return null;
@@ -66,9 +66,8 @@ public class WanderState : BaseState
     private void FindRandomDestination()
     {
         RaycastHit hit;
-        var pos = transform.position;
+        var pos = transform.position + new Vector3(0, 0.1f, 0);
 
-        Debug.DrawRay(pos, transform.forward * 5f, Color.blue);
         if (Physics.Raycast(pos, transform.forward, out hit, 5f))
         {
             Debug.Log("Wall");
@@ -89,11 +88,11 @@ public class WanderState : BaseState
 
     void GetRandomPosition(Vector3 newLocationDirection)
     {
-        Vector3 newPosition = (transform.position + (newLocationDirection * 2f))
-            + new Vector3(UnityEngine.Random.Range(-1.5f, 1.5f), 0f, UnityEngine.Random.Range(-1.5f, 1.5f));
-        _destination = new Vector3(newPosition.x, 1f, newPosition.z);
+        Vector3 newPosition = (transform.position + (newLocationDirection * 2.5f))
+            + new Vector3(UnityEngine.Random.Range(-2.5f, 2.5f), 0, UnityEngine.Random.Range(-2.5f, 2.5f));
+        _destination = new Vector3(newPosition.x, 0, newPosition.z);
         _zombie._navMeshAgent.SetDestination(_destination.Value);
-
-        idleTime = Time.time + UnityEngine.Random.Range(0.5f, 2f);
+        idleTime = Time.time + UnityEngine.Random.Range(0.5f, 5f);
+        Debug.Log(_destination.Value);
     }
 }

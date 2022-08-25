@@ -10,11 +10,13 @@ public class ZombieController : MonoBehaviour, IDamageable
     [SerializeField] int zombieDamage;
     public Transform Target { get; private set; }
     public NavMeshAgent _navMeshAgent { get; private set; }
+    private Animator _animator;
     private StateMachine _stateMachine;
     private void Awake()
     {
         _stateMachine = GetComponent<StateMachine>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _animator = GetComponentInChildren<Animator>();
         InitializeStateMachine();
     }
     public void SetTarget(Transform target)
@@ -53,4 +55,5 @@ public class ZombieController : MonoBehaviour, IDamageable
             Destroy(gameObject);
         }
     }
+
 }
